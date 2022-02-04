@@ -18,11 +18,7 @@ exports.postAddProduct = (req, res, next) => {
     price: price,
     description: description,
     imageUrl: imageUrl,
-    userId: {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
-      required: true
-    }
+    userId: req.user
   });
   product
     .save()
