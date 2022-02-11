@@ -1,0 +1,29 @@
+After completing the assignment, be sure to push to Github and Heroku.
+Please answer the questions in this text file and submit it to I-Learn.
+
+1. Copy and paste the URL for your web application (e.g., Heroku):
+https://cse341-week05.herokuapp.com/
+
+2. Copy and paste the URL for your source code repository (e.g., GitHub):
+https://github.com/adgar152369/CSE341
+
+3. Briefly list and describe the elements of the application that are functioning. 
+Authentication, creating sessions and cookies are all functioning as expected. 
+
+4. Briefly describe any pieces of the assignment that are not yet working correctly.
+
+5. Briefly describe the "coolest" thing you learned while completing this assignment.
+How sessions and cookies can create an efficient program for the user, like saving their login session, or only applying certain views elements if a user is logged in.
+
+6. If you could change this assignment to be more effective or helpful, what would you change?
+Maybe update the videos
+
+7. Please select the category you feel best describes your assignment:
+   1 - Some attempt was made
+   2 - Developing, but significantly deficient
+   3 - Slightly deficient, but still mostly adequate
+   4 - Meets requirements
+   5 - Shows creativity and excels above and beyond requirements *
+
+8. Provide a brief justification (1-2 sentences) for selecting that category.
+I really enjoyed this session. In previous sections, I struggled to understand the concept because they were more difficult, but I think I got the hang of sessions and cookies, as well as, authentication.
