@@ -54,9 +54,8 @@ router.get('/:jobId', (req, res, next) => {
 });
 
 router.patch('/:jobId', (req, res, next) => {
-    res.status(200).json({
-        message: 'updated job!'
-    });
+  const id = req.params.jobId;
+  Job.update()
 });
 
 router.delete('/:jobId', (req, res, next) => {
