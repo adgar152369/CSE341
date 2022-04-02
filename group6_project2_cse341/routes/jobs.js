@@ -9,9 +9,14 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-    res.status(200).json({
-        message: 'handling POST requests to /jobs'
-    });
+  const job = {
+    title: req.body.title,
+    description: req.body.description
+  }
+  res.status(200).json({
+      message: 'job created',
+      createdJob: job
+  });
 });
 
 router.get('/:jobId', (req, res, next) => {

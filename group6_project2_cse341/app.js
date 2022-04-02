@@ -2,11 +2,14 @@ const express = require('express');
 const app = express();
 // see details of incoming requests
 const morgan = require('morgan');
+const bodyParser = require('body-parser');
 
 const jobRoutes = require('./routes/jobs');
 const authRoutes = require('./routes/auth');
 
 app.use(morgan('dev'));
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
 // forward requests to these routes
 app.use('/jobs', jobRoutes);
