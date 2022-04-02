@@ -3,9 +3,13 @@ const app = express();
 // see details of incoming requests
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 const jobRoutes = require('./routes/jobs');
 const authRoutes = require('./routes/auth');
+
+// connect to database using mongoose
+mongoose.connect('mongodb+srv://adgar1523:092696cod@cluster0.zygoz.mongodb.net/job-api?retryWrites=true&w=majority');
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
