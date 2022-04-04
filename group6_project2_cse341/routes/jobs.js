@@ -3,6 +3,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 // import job model
 const Job = require('../models/job');
+const checkAuth = require('../middleware/auth');
 
 // handle incoming GET requests to /jobs
 router.get('/', (req, res, next) => {
@@ -19,7 +20,7 @@ router.get('/', (req, res, next) => {
       .catch(err => console.log(err));
 });
 
-router.post('/', (req, res, next) => {
+router.post('/', checkAuth, (req, res, next) => {
   const job = new Job({
     _id: new mongoose.Types.ObjectId(),
     title: req.body.title,
