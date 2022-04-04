@@ -7,17 +7,17 @@ const checkAuth = require('../middleware/auth');
 
 const Admin = require('../models/admin');
 
-// router.get('/', (req, res, next) => {
-//     Admin.find()
-//         .select('firstName lastName company _id email')
-//         .exec()
-//         .then(docs => {
-//             res.status(200).json(docs);
-//         })
-//         .catch(err => {
-//             console.log(err);
-//         });
-// });
+router.get('/', (req, res, next) => {
+    Admin.find()
+        .select('firstName lastName company _id email')
+        .exec()
+        .then(docs => {
+            res.status(200).json(docs);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+});
 // user can register (create new user)
 router.post('/signup', (req, res, next) => {
     Admin.find({ email: req.body.email })
@@ -40,7 +40,7 @@ router.post('/signup', (req, res, next) => {
                             _id: new mongoose.Types.ObjectId(),
                             firstName: req.body.firstName,
                             lastName: req.body.lastName,
-                            occupation: req.body.occupation,
+                            position: req.body.position,
                             company: req.body.company,
                             email: req.body.email,
                             password: hash
@@ -87,7 +87,8 @@ router.post('/login', (req, res, next) => {
 
                     return res.status(200).json({
                         message: 'Authentication successful',
-                        token: token
+                        token: token,
+                        userID: user[0]._id
                     })
                 }
                 return res.status(401).json({
@@ -104,7 +105,7 @@ router.post('/login', (req, res, next) => {
 });
 
 // update the user
-router.patch('/:userId', checkAuth, (req, res, next) => {
+router.patch('/:userId', (req, res, next) => {
     res.status(200).json({
         message: 'updated the user!',
         userId: req.params.userId

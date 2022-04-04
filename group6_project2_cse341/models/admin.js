@@ -10,7 +10,7 @@ const adminSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  occupation: {
+  position: {
     type: String,
     required: true
   },
