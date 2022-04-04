@@ -58,7 +58,7 @@ router.get('/:jobId', (req, res, next) => {
       .catch(err => console.log(err));
 });
 
-router.patch('/:jobId', (req, res, next) => {
+router.patch('/:jobId', checkAuth, (req, res, next) => {
   const id = req.params.jobId;
   const updateOps = {};
   // loop through request body as an array
@@ -74,7 +74,7 @@ router.patch('/:jobId', (req, res, next) => {
     .catch(err => console.log(err));
 });
 
-router.delete('/:jobId', (req, res, next) => {
+router.delete('/:jobId', checkAuth, (req, res, next) => {
   const id = req.params.jobId;
     Job.remove({
       _id: id

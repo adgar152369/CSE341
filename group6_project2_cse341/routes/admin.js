@@ -3,14 +3,21 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const checkAuth = require('../middleware/auth');
 
 const Admin = require('../models/admin');
 
-router.get('/', (req, res, next) => {
-    res.status(200).json({
-        message: 'handling GET requests to /user'
-    });
-});
+// router.get('/', (req, res, next) => {
+//     Admin.find()
+//         .select('firstName lastName company _id email')
+//         .exec()
+//         .then(docs => {
+//             res.status(200).json(docs);
+//         })
+//         .catch(err => {
+//             console.log(err);
+//         });
+// });
 // user can register (create new user)
 router.post('/signup', (req, res, next) => {
     Admin.find({ email: req.body.email })
@@ -97,14 +104,14 @@ router.post('/login', (req, res, next) => {
 });
 
 // update the user
-router.patch('/:userId', (req, res, next) => {
+router.patch('/:userId', checkAuth, (req, res, next) => {
     res.status(200).json({
         message: 'updated the user!',
         userId: req.params.userId
     });
 });
 
-router.delete('/:userId', (req, res, next) => {
+router.delete('/:userId', checkAuth, (req, res, next) => {
     Admin.remove({_id: req.params.userId})
         .exec()
         .then(result => {
