@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 // see details of incoming requests
@@ -6,10 +7,12 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 const jobRoutes = require('./routes/jobs');
-const authRoutes = require('./routes/auth');
+const adminRoutes = require('./routes/admin');
 
 // connect to database using mongoose
-mongoose.connect('mongodb+srv://adgar1523:092696cod@cluster0.zygoz.mongodb.net/job-api?retryWrites=true&w=majority');
+mongoose.connect(process.env.MONGO_ATLAS_CONNECTION, () => {
+    console.log('connected to database');
+});
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
@@ -29,7 +32,7 @@ app.use((res, req, next) => {
 
 // forward requests to these routes
 app.use('/jobs', jobRoutes);
-app.use('/user', authRoutes);
+app.use('/user', adminRoutes);
 
 // execute when request doesn't reach routes
 app.use((req, res, next) => {
