@@ -7,10 +7,14 @@ const Job = require('../models/job');
 // handle incoming GET requests to /jobs
 router.get('/', (req, res, next) => {
     Job.find()
+      .select('title employer _id description wage datePosted')
       .exec()
       .then(docs => {
-        console.log(docs);
-        res.status(200).json(docs);
+        const response = {
+          count: docs.length,
+          jobs: docs
+        };
+        res.status(200).json(response);
       })
       .catch(err => console.log(err));
 });
@@ -55,7 +59,18 @@ router.get('/:jobId', (req, res, next) => {
 
 router.patch('/:jobId', (req, res, next) => {
   const id = req.params.jobId;
-  Job.update()
+  const updateOps = {};
+  // loop through request body as an array
+  for (const ops of req.body) {
+    updateOps[ops.propName] = ops.value;
+  }
+  Job.updateOne({_id: id}, { $set: {updateOps}})
+    .exec()
+    .then(result => {
+      console.log(result);
+      res.status(200).json(result)
+    })
+    .catch(err => console.log(err));
 });
 
 router.delete('/:jobId', (req, res, next) => {
