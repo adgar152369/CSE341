@@ -17,7 +17,9 @@ router.get('/', (req, res, next) => {
         };
         res.status(200).json(response);
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+      });
 });
 
 router.post('/', checkAuth, (req, res, next) => {
@@ -81,7 +83,11 @@ router.delete('/:jobId', checkAuth, (req, res, next) => {
     })
     .exec()
     .then(result => {
-      res.status(200).json(result);
+      res.status(200).json({
+        message: 'job post deleted.',
+        result
+      });
+
     })
     .catch(err => console.log(err));
 });
